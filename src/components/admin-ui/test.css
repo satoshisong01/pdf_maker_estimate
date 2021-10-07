@@ -1,0 +1,80 @@
+body{
+    background-color:whitesmoke;
+}
+
+.testpages{
+    display: flex;
+    position: relative;
+}
+
+.admin-title{
+    padding: 20px;
+    border-bottom: solid 3px gray;
+}
+
+.main-table{
+    margin-top: 60px;
+}
+
+.add-btn{
+    font-size: x-large;
+    position: absolute;
+    top: 11vh;
+    left: 18vw;
+    text-align: center;
+    border: none;
+    background-color:seagreen;
+    color:mintcream;
+    border-radius: 5px;
+}
+
+.btn{
+    border: none;
+    border-radius: 5px;
+    color: mintcream;
+    background-color: seagreen;
+}
+
+.inputbox{
+    margin: auto;
+    width: 400px;
+    height: 100px;
+}
+
+.inputbox-text,
+.inputbox-num{
+    width: 400px;
+    height: 50px;
+}
+
+.inputbox-con{
+    height: 400px;
+}
+
+.input-menu{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.btn{
+    font-size: x-large;
+    border-radius: 5%;
+    margin: auto;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+}
+
+.title-input{
+    margin-top: 10px;
+    display: flex;
+}
+
+.inputdiv{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}

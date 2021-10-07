@@ -1,0 +1,23 @@
+*{
+    box-sizing: border-box;
+}
+
+.admin_ui{
+    width: 100%;
+    display: flex;
+}
+
+.admin-right{
+    width: 100%;
+    margin-left: 20px;
+}
+
+.ant-table-wrapper {
+    clear: both;
+    max-width: 100%;
+    margin-top: 20px;
+}
+
+.ant-spin-container .ant-table-pagination-right {
+    justify-content: center;
+}
