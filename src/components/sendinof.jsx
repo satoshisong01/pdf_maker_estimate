@@ -376,6 +376,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  image: {
+    textAlign: 'center',
+    margin: 'auto',
+    marginBottom: 500,
+    width: 210,
+    height: 65,
+    opacity: 0.3,
+    position: 'absolute',
+  },
   text_total_price: {
     fontSize: 10,
     padding: 3,
@@ -622,6 +631,7 @@ const Sendinof = (props) => {
             </View>
           </View>
         </View>
+        <Image style={styles.image} src={images} />
       </Page>
     </Document>
   );
@@ -766,7 +776,6 @@ const Sendinof = (props) => {
   const nowTime_D = moment().format('DD');
 
   function priceConvertKorean(num) {
-    console.log(num);
     num = num / 10 + num;
     let changenum = num.toString();
     var x = new Array(
@@ -820,7 +829,6 @@ const Sendinof = (props) => {
     return result;
   }
 
-  console.log(totalprice);
   korPrice = priceConvertKorean(totalprice);
   return (
     <>

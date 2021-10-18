@@ -54,6 +54,37 @@ function Detailform() {
   let [mailsendcontent, setMailsendcontent] = useState('');
   let [mailsendAll, setMailsendAll] = useState([]);
 
+  const [ScrollY, setScrollY] = useState(0);
+  const [BtnStatus, setBtnStatus] = useState(false);
+
+  const handleFollow = () => {
+    setScrollY(window.pageYOffset);
+    if (ScrollY > 200) {
+      setBtnStatus(true);
+    } else {
+      setBtnStatus(false);
+    }
+  };
+
+  const handleTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    setScrollY(0);
+    setBtnStatus(false);
+  };
+
+  useEffect(() => {
+    const watch = () => {
+      window.addEventListener('scroll', handleFollow);
+    };
+    watch();
+    return () => {
+      window.removeEventListener('scroll', handleFollow);
+    };
+  });
+
   const infomation = () => {
     axios.get('/api/platform').then((res) => {
       setInfo(res.data);
@@ -327,6 +358,14 @@ function Detailform() {
 
           {/* {arrayMap(uipages)} */}
         </div>
+      </div>
+      <div className="wrap">
+        <button
+          className={BtnStatus ? 'topBtn active' : 'topBtn'}
+          onClick={handleTop}
+        >
+          TOP
+        </button>
       </div>
     </>
   );
