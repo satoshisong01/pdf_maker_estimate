@@ -54,6 +54,8 @@ function Detailform() {
   let [mailsendcontent, setMailsendcontent] = useState('');
   let [mailsendAll, setMailsendAll] = useState([]);
 
+  let [sendtotalcount, setSendTotalCount] = useState(0);
+
   const [ScrollY, setScrollY] = useState(0);
   const [BtnStatus, setBtnStatus] = useState(false);
 
@@ -198,6 +200,7 @@ function Detailform() {
       let num = item.price;
       mailsend_UI = item;
       setPriceui((priceui = num));
+      console.log(num);
     } else {
       console.log('아직아무것도');
     }
@@ -216,12 +219,14 @@ function Detailform() {
     let num = item.price;
 
     if (e.target.checked) {
+      setSendTotalCount(sendtotalcount + 1);
       setPriced((priced = priced + num));
       setMailsendname(mailsend_name);
       setMailsendcontent(mailsend_content);
       setMailsendAll(mailsend_All);
       arr.push(item);
     } else {
+      setSendTotalCount(sendtotalcount - 1);
       setPriced((priced = priced - num));
       setMailsendname('');
       setMailsendcontent('');
@@ -312,6 +317,7 @@ function Detailform() {
           pricedui={priceui}
           pricedtotal={priced}
           priceservice={priceservice}
+          sendtcount={sendtotalcount}
         />
         <div className="item-lists">
           <div className="caution">

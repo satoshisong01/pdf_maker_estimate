@@ -419,6 +419,11 @@ const Sendinof = (props) => {
   let [changenames, setChangeNames] = useState('');
   let [changecompanys, setChangeCompanys] = useState('');
   let [changeemails, setChangeEmails] = useState('');
+  let [countTotal, setCountTotal] = useState(0);
+  let [countUi, setCountUi] = useState(0);
+  let [countService, setCountService] = useState(0);
+
+  let total_item_count = countService + countTotal + countUi;
 
   let pdfList_Ui = props.arrui;
   let pdfList_Service = props.arrservice;
@@ -426,252 +431,4525 @@ const Sendinof = (props) => {
   let korPrice = '';
   let totalprice = props.pricedtotal + props.pricedui + props.priceservice;
 
-  const MyDoc = () => (
-    <Document style={{ fontFamily: 'Sunflower' }}>
-      <Page style={styles.page}>
-        <Text style={styles.main_title}>
-          견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
-        </Text>
-        <View style={styles.pagesize}>
-          <View style={styles.tableRow}>
-            <View style={styles.cut1}>
-              <Text style={styles.text_day}>
-                {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
-                &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
-              </Text>
-              <Text style={styles.text_day}>
-                <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
-              </Text>
-              <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
-            </View>
-            <View style={styles.cut2}>
-              <Text style={styles.text_sub}>공</Text>
-              <Text style={styles.text_sub}>급</Text>
-              <Text style={styles.text_sub}>자</Text>
-            </View>
-            <View style={styles.cut3}>
-              <View style={styles.cut3_line}>
-                <Text style={styles.text_num}>등록번호</Text>
-              </View>
-              <View style={styles.cut3_line}>
-                <Text style={styles.text_num}>상호명</Text>
-              </View>
-              <View style={styles.cut3_line}>
-                <Text style={styles.text_num}>주소</Text>
-              </View>
-              <View style={styles.cut3_line_upte}>
-                <Text style={styles.text_num}>업태</Text>
-              </View>
-              <View style={styles.cut3_line_phone_num}>
-                <Text style={styles.text_num}>전화번호</Text>
-              </View>
-            </View>
-            <View style={styles.cut4}>
-              <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
-              <View style={styles.cut4_0}>
-                <View style={styles.cut4_1_sysner}>
-                  <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
-                </View>
-                <View style={styles.cut4_gy_owner}>
-                  <Text style={styles.text_num}>대표자</Text>
-                </View>
-                <View style={styles.cut4_1_ownername}>
-                  <Text style={styles.text_num_whiteBG}>서진석</Text>
-                </View>
-              </View>
+  console.log(totalprice);
 
-              <Text style={styles.text_num_whiteBG_addrres}>
-                경기도 안양시 동안구 벌말로 123(관양동) 605호
-              </Text>
+  let sendtotalcount = props.sendtcount;
 
-              <View style={styles.cut4_0}>
-                <View style={styles.cut4_1}>
-                  <Text style={styles.text_num_whiteBG}>서비스</Text>
+  const MyDoc = () => {
+    if (sendtotalcount < 16) {
+      return (
+        <Document style={{ fontFamily: 'Sunflower' }}>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
                 </View>
-                <View style={styles.cut4_gy_list}>
-                  <Text style={styles.text_num}>종목</Text>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
                 </View>
-                <View style={styles.cut4_1}>
-                  <Text style={styles.text_num_whiteBG}>온라인</Text>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
                 </View>
               </View>
-              <View style={styles.cut4_0}>
-                <View style={styles.cut4_1}>
-                  <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
                 </View>
-                <View style={styles.cut4_gy}>
-                  <Text style={styles.text_num}>팩스</Text>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
                 </View>
-                <View style={styles.cut4_1}>
-                  <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_mail_ui(pdfList_Ui)}
+              {Sendinfo_mail_service(pdfList_Service)}
+              {Sendinfo_mail(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
                 </View>
               </View>
             </View>
-          </View>
-          <View style={styles.estimate}>
-            <View style={styles.price_Sum}>
-              <Text style={styles.text_sum_price}>
-                합&nbsp;계&nbsp;금&nbsp;액
-              </Text>
-              <Text style={styles.text_total_price}>
-                (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
-              </Text>
+            <Image style={styles.image} src={images} />
+          </Page>
+        </Document>
+      );
+    } else if ((sendtotalcount > 15) & (sendtotalcount < 33)) {
+      return (
+        <Document style={{ fontFamily: 'Sunflower' }}>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_mail_ui(pdfList_Ui)}
+              {Sendinfo_mail_service(pdfList_Service)}
+              {Sendinfo_mail(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
             </View>
-            <View style={styles.price_sum_Total}>
-              <Text style={styles.price_kor_Total}>
-                <span style={{ color: 'red' }}>{korPrice}</span>
-                &nbsp;원&nbsp;정&nbsp; (₩{' '}
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_semi(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+        </Document>
+      );
+    } else if ((sendtotalcount >= 33) & (sendtotalcount < 49)) {
+      return (
+        <Document style={{ fontFamily: 'Sunflower' }}>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_mail_ui(pdfList_Ui)}
+              {Sendinfo_mail_service(pdfList_Service)}
+              {Sendinfo_mail(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_semi(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_thrd(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+        </Document>
+      );
+    } else if ((sendtotalcount >= 49) & (sendtotalcount < 65)) {
+      return (
+        <Document style={{ fontFamily: 'Sunflower' }}>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_mail_ui(pdfList_Ui)}
+              {Sendinfo_mail_service(pdfList_Service)}
+              {Sendinfo_mail(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_semi(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_thrd(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_fourd(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+        </Document>
+      );
+    } else if ((sendtotalcount >= 65) & (sendtotalcount < 81)) {
+      return (
+        <Document style={{ fontFamily: 'Sunflower' }}>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_mail_ui(pdfList_Ui)}
+              {Sendinfo_mail_service(pdfList_Service)}
+              {Sendinfo_mail(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_semi(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_thrd(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_fourd(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_five(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+        </Document>
+      );
+    } else if ((sendtotalcount >= 81) & (sendtotalcount < 97)) {
+      return (
+        <Document style={{ fontFamily: 'Sunflower' }}>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_mail_ui(pdfList_Ui)}
+              {Sendinfo_mail_service(pdfList_Service)}
+              {Sendinfo_mail(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_semi(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_thrd(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_fourd(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+          <Page style={styles.page}>
+            <Text style={styles.main_title}>
+              견&nbsp;&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;&nbsp;서
+            </Text>
+            <View style={styles.pagesize}>
+              <View style={styles.tableRow}>
+                <View style={styles.cut1}>
+                  <Text style={styles.text_day}>
+                    {nowTime_H}&nbsp;년&nbsp;&nbsp;&nbsp;{nowTime_M}
+                    &nbsp;월&nbsp;&nbsp;&nbsp;{nowTime_D}&nbsp;일
+                  </Text>
+                  <Text style={styles.text_day}>
+                    <span style={{ color: 'red' }}>{changecompanys}</span> 귀하
+                  </Text>
+                  <Text style={styles.text_day}>아래와 같이 견적합니다.</Text>
+                </View>
+                <View style={styles.cut2}>
+                  <Text style={styles.text_sub}>공</Text>
+                  <Text style={styles.text_sub}>급</Text>
+                  <Text style={styles.text_sub}>자</Text>
+                </View>
+                <View style={styles.cut3}>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>등록번호</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>상호명</Text>
+                  </View>
+                  <View style={styles.cut3_line}>
+                    <Text style={styles.text_num}>주소</Text>
+                  </View>
+                  <View style={styles.cut3_line_upte}>
+                    <Text style={styles.text_num}>업태</Text>
+                  </View>
+                  <View style={styles.cut3_line_phone_num}>
+                    <Text style={styles.text_num}>전화번호</Text>
+                  </View>
+                </View>
+                <View style={styles.cut4}>
+                  <Text style={styles.text_num_whiteBG}>582-86-01465</Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1_sysner}>
+                      <Text style={styles.text_num_whiteBG}>(주)시스너</Text>
+                    </View>
+                    <View style={styles.cut4_gy_owner}>
+                      <Text style={styles.text_num}>대표자</Text>
+                    </View>
+                    <View style={styles.cut4_1_ownername}>
+                      <Text style={styles.text_num_whiteBG}>서진석</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.text_num_whiteBG_addrres}>
+                    경기도 안양시 동안구 벌말로 123(관양동) 605호
+                  </Text>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>서비스</Text>
+                    </View>
+                    <View style={styles.cut4_gy_list}>
+                      <Text style={styles.text_num}>종목</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>온라인</Text>
+                    </View>
+                  </View>
+                  <View style={styles.cut4_0}>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>010-5178-2219</Text>
+                    </View>
+                    <View style={styles.cut4_gy}>
+                      <Text style={styles.text_num}>팩스</Text>
+                    </View>
+                    <View style={styles.cut4_1}>
+                      <Text style={styles.text_num_whiteBG}>031-383-3322</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_sum_price}>
+                    합&nbsp;계&nbsp;금&nbsp;액
+                  </Text>
+                  <Text style={styles.text_total_price}>
+                    (공급가액&nbsp;&nbsp;+&nbsp;&nbsp;세액)
+                  </Text>
+                </View>
+                <View style={styles.price_sum_Total}>
+                  <Text style={styles.price_kor_Total}>
+                    <span style={{ color: 'red' }}>{korPrice}</span>
+                    &nbsp;원&nbsp;정&nbsp; (₩{' '}
+                    <span style={{ color: 'red' }}>
+                      {(totalprice / 10 + totalprice)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </span>
+                    &nbsp;)
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum}>
+                  <Text style={styles.text_item_name}>
+                    품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+                  </Text>
+                </View>
+                <View style={styles.price_item1}>
+                  <Text style={styles.price_kor_Total}>
+                    단&nbsp;&nbsp;&nbsp;가
+                  </Text>
+                </View>
+                <View style={styles.price_item2}>
+                  <Text style={styles.price_kor_Total}>
+                    공&nbsp;급&nbsp;가&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item3}>
+                  <Text style={styles.price_kor_Total}>
+                    세&nbsp;&nbsp;&nbsp;액
+                  </Text>
+                </View>
+                <View style={styles.price_item4}>
+                  <Text style={styles.price_kor_Total}>
+                    비&nbsp;&nbsp;&nbsp;고
+                  </Text>
+                </View>
+              </View>
+              {Sendinfo_six(pdfList)}
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white}>
+                  <Text style={styles.text_item_item_name}>&nbsp;</Text>
+                </View>
+                <View style={styles.price_item1_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.price_Sum_white_gray}>
+                  <Text style={styles.text_item_item_name_total}>계</Text>
+                </View>
+                <View style={styles.price_item2_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {totalprice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item3_white}>
+                  <Text
+                    style={
+                      (styles.text_item_item_name,
+                      { color: 'red', fontSize: 10 })
+                    }
+                  >
+                    {(totalprice / 10)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  </Text>
+                </View>
+                <View style={styles.price_item4_white}>
+                  <Text style={styles.text_item_item_name}></Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_gray}>
+                  <Text style={styles.text_item_item_name_total}>
+                    특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.estimate}>
+                <View style={styles.info_white}>
+                  <Text style={styles.text_item_item_name_total_write}>
+                    ※ 본 견적서는 견적일로부터 30일간 유효합니다.
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <Image style={styles.image} src={images} />
+          </Page>
+        </Document>
+      );
+    }
+  };
+
+  const Sendinfo_mail = (array) => {
+    return array.map((item, index) => {
+      if (index < 15)
+        return (
+          <View style={styles.estimate} key={index}>
+            <View style={styles.price_Sum_white}>
+              <span style={{ color: 'red' }}>
+                <Text style={styles.text_item_item_name}>{item.name}</Text>
+              </span>
+            </View>
+            <View style={styles.price_item1_white}>
+              <Text style={styles.text_item_item_name}>
                 <span style={{ color: 'red' }}>
-                  {(totalprice / 10 + totalprice)
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item2_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item3_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {(item.price / 10)
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </span>
-                &nbsp;)
-              </Text>
-            </View>
-          </View>
-          <View style={styles.estimate}>
-            <View style={styles.price_Sum}>
-              <Text style={styles.text_item_name}>
-                품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
-              </Text>
-            </View>
-            <View style={styles.price_item1}>
-              <Text style={styles.price_kor_Total}>단&nbsp;&nbsp;&nbsp;가</Text>
-            </View>
-            <View style={styles.price_item2}>
-              <Text style={styles.price_kor_Total}>
-                공&nbsp;급&nbsp;가&nbsp;액
-              </Text>
-            </View>
-            <View style={styles.price_item3}>
-              <Text style={styles.price_kor_Total}>세&nbsp;&nbsp;&nbsp;액</Text>
-            </View>
-            <View style={styles.price_item4}>
-              <Text style={styles.price_kor_Total}>비&nbsp;&nbsp;&nbsp;고</Text>
-            </View>
-          </View>
-          {Sendinfo_mail(pdfList)}
-          {Sendinfo_mail_ui(pdfList_Ui)}
-          {Sendinfo_mail_service(pdfList_Service)}
-          <View style={styles.estimate}>
-            <View style={styles.price_Sum_white}>
-              <Text style={styles.text_item_item_name}>&nbsp;</Text>
-            </View>
-            <View style={styles.price_item1_white}>
-              <Text style={styles.text_item_item_name}></Text>
-            </View>
-            <View style={styles.price_item2_white}>
-              <Text style={styles.text_item_item_name}></Text>
-            </View>
-            <View style={styles.price_item3_white}>
-              <Text style={styles.text_item_item_name}></Text>
-            </View>
-            <View style={styles.price_item4_white}>
-              <Text style={styles.text_item_item_name}></Text>
-            </View>
-          </View>
-          <View style={styles.estimate}>
-            <View style={styles.price_Sum_white}>
-              <Text style={styles.text_item_item_name}>&nbsp;</Text>
-            </View>
-            <View style={styles.price_item1_white}>
-              <Text style={styles.text_item_item_name}></Text>
-            </View>
-            <View style={styles.price_item2_white}>
-              <Text style={styles.text_item_item_name}></Text>
-            </View>
-            <View style={styles.price_item3_white}>
-              <Text style={styles.text_item_item_name}></Text>
-            </View>
-            <View style={styles.price_item4_white}>
-              <Text style={styles.text_item_item_name}></Text>
-            </View>
-          </View>
-          <View style={styles.estimate}>
-            <View style={styles.price_Sum_white_gray}>
-              <Text style={styles.text_item_item_name_total}>계</Text>
-            </View>
-            <View style={styles.price_item2_white}>
-              <Text
-                style={
-                  (styles.text_item_item_name, { color: 'red', fontSize: 10 })
-                }
-              >
-                {totalprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              </Text>
-            </View>
-            <View style={styles.price_item3_white}>
-              <Text
-                style={
-                  (styles.text_item_item_name, { color: 'red', fontSize: 10 })
-                }
-              >
-                {(totalprice / 10)
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               </Text>
             </View>
             <View style={styles.price_item4_white}>
               <Text style={styles.text_item_item_name}></Text>
             </View>
           </View>
-          <View style={styles.estimate}>
-            <View style={styles.info_gray}>
-              <Text style={styles.text_item_item_name_total}>
-                특&nbsp;&nbsp;이&nbsp;&nbsp;사&nbsp;&nbsp;항
-              </Text>
-            </View>
-          </View>
-          <View style={styles.estimate}>
-            <View style={styles.info_white}>
-              <Text style={styles.text_item_item_name_total_write}>
-                ※ 본 견적서는 견적일로부터 30일간 유효합니다.
-              </Text>
-            </View>
-          </View>
-        </View>
-        <Image style={styles.image} src={images} />
-      </Page>
-    </Document>
-  );
+        );
+    });
+  };
 
-  const Sendinfo_mail = (array) => {
-    return array.map((item, index) => (
-      <View style={styles.estimate} key={index}>
-        <View style={styles.price_Sum_white}>
-          <span style={{ color: 'red' }}>
-            <Text style={styles.text_item_item_name}>{item.name}</Text>
-          </span>
-        </View>
-        <View style={styles.price_item1_white}>
-          <Text style={styles.text_item_item_name}>
-            <span style={{ color: 'red' }}>
-              {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            </span>
-          </Text>
-        </View>
-        <View style={styles.price_item2_white}>
-          <Text style={styles.text_item_item_name}>
-            <span style={{ color: 'red' }}>
-              {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            </span>
-          </Text>
-        </View>
-        <View style={styles.price_item3_white}>
-          <Text style={styles.text_item_item_name}>
-            <span style={{ color: 'red' }}>
-              {(item.price / 10)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            </span>
-          </Text>
-        </View>
-        <View style={styles.price_item4_white}>
-          <Text style={styles.text_item_item_name}></Text>
-        </View>
-      </View>
-    ));
+  const Sendinfo_semi = (array) => {
+    return array.map((item, index) => {
+      if ((index >= 15) & (index < 32)) {
+        return (
+          <View style={styles.estimate} key={index}>
+            <View style={styles.price_Sum_white}>
+              <span style={{ color: 'red' }}>
+                <Text style={styles.text_item_item_name}>{item.name}</Text>
+              </span>
+            </View>
+            <View style={styles.price_item1_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item2_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item3_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {(item.price / 10)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item4_white}>
+              <Text style={styles.text_item_item_name}></Text>
+            </View>
+          </View>
+        );
+      }
+    });
+  };
+
+  const Sendinfo_thrd = (array) => {
+    return array.map((item, index) => {
+      if ((index >= 32) & (index < 48)) {
+        return (
+          <View style={styles.estimate} key={index}>
+            <View style={styles.price_Sum_white}>
+              <span style={{ color: 'red' }}>
+                <Text style={styles.text_item_item_name}>{item.name}</Text>
+              </span>
+            </View>
+            <View style={styles.price_item1_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item2_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item3_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {(item.price / 10)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item4_white}>
+              <Text style={styles.text_item_item_name}></Text>
+            </View>
+          </View>
+        );
+      }
+    });
+  };
+
+  const Sendinfo_fourd = (array) => {
+    return array.map((item, index) => {
+      if ((index >= 48) & (index < 64)) {
+        return (
+          <View style={styles.estimate} key={index}>
+            <View style={styles.price_Sum_white}>
+              <span style={{ color: 'red' }}>
+                <Text style={styles.text_item_item_name}>{item.name}</Text>
+              </span>
+            </View>
+            <View style={styles.price_item1_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item2_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item3_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {(item.price / 10)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item4_white}>
+              <Text style={styles.text_item_item_name}></Text>
+            </View>
+          </View>
+        );
+      }
+    });
+  };
+
+  const Sendinfo_five = (array) => {
+    return array.map((item, index) => {
+      if ((index >= 64) & (index < 80)) {
+        return (
+          <View style={styles.estimate} key={index}>
+            <View style={styles.price_Sum_white}>
+              <span style={{ color: 'red' }}>
+                <Text style={styles.text_item_item_name}>{item.name}</Text>
+              </span>
+            </View>
+            <View style={styles.price_item1_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item2_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item3_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {(item.price / 10)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item4_white}>
+              <Text style={styles.text_item_item_name}></Text>
+            </View>
+          </View>
+        );
+      }
+    });
+  };
+
+  const Sendinfo_six = (array) => {
+    return array.map((item, index) => {
+      if ((index >= 80) & (index < 96)) {
+        return (
+          <View style={styles.estimate} key={index}>
+            <View style={styles.price_Sum_white}>
+              <span style={{ color: 'red' }}>
+                <Text style={styles.text_item_item_name}>{item.name}</Text>
+              </span>
+            </View>
+            <View style={styles.price_item1_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item2_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item3_white}>
+              <Text style={styles.text_item_item_name}>
+                <span style={{ color: 'red' }}>
+                  {(item.price / 10)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </span>
+              </Text>
+            </View>
+            <View style={styles.price_item4_white}>
+              <Text style={styles.text_item_item_name}></Text>
+            </View>
+          </View>
+        );
+      }
+    });
   };
 
   const Sendinfo_mail_ui = (array) => {
@@ -817,10 +5095,10 @@ const Sendinof = (props) => {
       str = '';
       han = x[changenum.charAt(changenum.length - (i + 1))];
       if (han != '') str += han + y[i];
-      if (i == 4) str += '만';
-      if (i == 8) str += '억';
-      if (i == 12) str += '조';
-      if (i == 16) str += '경';
+      if (i === 4) str += '만';
+      if (i === 8) str += '억';
+      if (i === 12) str += '조';
+      if (i === 16) str += '경';
 
       result = str + result;
     }
@@ -862,7 +5140,10 @@ const Sendinof = (props) => {
           {pdfList_Ui.price > 0 ? (
             <button className="send-button">
               <div className="App">
-                <PDFDownloadLink document={<MyDoc />} fileName={`견적서.pdf`}>
+                <PDFDownloadLink
+                  document={<MyDoc />}
+                  fileName={`견적서_${changecompanys}_${nowTime_H}_${nowTime_M}_${nowTime_D}.pdf`}
+                >
                   {({ blob, url, loading, error }) =>
                     loading ? '견적서 작성중' : '견적서 메일 보내기'
                   }
