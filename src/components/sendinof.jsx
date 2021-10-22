@@ -431,8 +431,6 @@ const Sendinof = (props) => {
   let korPrice = '';
   let totalprice = props.pricedtotal + props.pricedui + props.priceservice;
 
-  console.log(totalprice);
-
   let sendtotalcount = props.sendtcount;
 
   const MyDoc = () => {
@@ -5129,7 +5127,7 @@ const Sendinof = (props) => {
             type="email"
             className="add-email"
             onChange={changeEmail}
-            placeholder="이메일주소를입력해주세요"
+            placeholder="이메일주소를입력해주세요 (생략가능)"
           />
           {/* <input
             type="text"
@@ -5145,7 +5143,7 @@ const Sendinof = (props) => {
                   fileName={`견적서_${changecompanys}_${nowTime_H}_${nowTime_M}_${nowTime_D}.pdf`}
                 >
                   {({ blob, url, loading, error }) =>
-                    loading ? '견적서 작성중' : '견적서 메일 보내기'
+                    loading ? '견적서 작성중' : '견적서 다운로드'
                   }
                 </PDFDownloadLink>
               </div>

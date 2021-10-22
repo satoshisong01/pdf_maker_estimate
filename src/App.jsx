@@ -83,7 +83,6 @@ function App() {
           path="/update/:data/:table/:title/:price/:content"
           component={Update}
         />
-        <Route path="/test" component={Testing} />
       </Switch>
     </BrowserRouter>
   );
