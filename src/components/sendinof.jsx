@@ -5123,12 +5123,12 @@ const Sendinof = (props) => {
             onChange={changeCompany}
             placeholder="회사명 또는 성함"
           />
-          <input
+          {/* <input
             type="email"
             className="add-email"
             onChange={changeEmail}
             placeholder="이메일주소를입력해주세요 (생략가능)"
-          />
+          /> */}
           {/* <input
             type="text"
             className="add-name"

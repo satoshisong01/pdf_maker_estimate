@@ -8,8 +8,8 @@ const mysql = require('mysql');
 const db = mysql.createPool({
   host: '49.50.167.157', // 공인 아이피 주소
   port: '3306',
-  user: 'song',
-  password: 'song',
+  user: 'root',
+  password: '20190418',
   database: 'sysner',
 });
 
@@ -74,6 +74,8 @@ app.post('/api/selectItem', (req, res) => {
 app.get('/api/all', (req, res) => {
   const sqlQuery = 'show tables;';
   db.query(sqlQuery, (err, result) => {
+    console.log(err);
+    console.log(result);
     res.send(result);
   });
 });
